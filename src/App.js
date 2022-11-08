@@ -1,14 +1,11 @@
-import './App.css';
-import Bannar from './Components/Header/Bannar';
-import Navbar from './Components/Header/Navbar';
-import Login from './Components/Login';
-import Register from './Components/Register';
+import { RouterProvider } from "react-router-dom";
+import "./App.css";
+import router from "./Route/router";
 
 function App() {
   return (
-    <div className='w-11/12 mx-auto'>
-<Login></Login>
-<Register></Register>
+    <div className="lg:w-11/12 mx-auto">
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
