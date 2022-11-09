@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import img from "../img/106680-login-and-sign-up.json";
+import { AuthContext } from "../Context/UserContext";
 const Login = () => {
-    const [error, setError] = useState("");
+  const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
+  const { LogInUser } = useContext(AuthContext);
+
   const onSubmit = (data) => {
-
-    console.log(data.Email)
-
-};
+    const email = data.Email;
+    const password = data.Password;
+    LogInUser( email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user)
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <div>
