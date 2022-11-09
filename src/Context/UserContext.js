@@ -1,7 +1,6 @@
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -28,6 +27,9 @@ const UserContext = ({ children }) => {
   const GoogleSignIn = (googleProvider) => {
     return signInWithPopup(auth, googleProvider);
   };
+  const GithubSignIn = (GithubProvider) => {
+    return signInWithPopup(auth, GithubProvider);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -45,6 +47,7 @@ const UserContext = ({ children }) => {
     LogInUser,
     Logout,
     GoogleSignIn,
+    GithubSignIn,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

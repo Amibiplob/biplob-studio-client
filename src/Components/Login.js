@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import img from "../img/106680-login-and-sign-up.json";
 import { AuthContext } from "../Context/UserContext";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Login = () => {
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
-  const { LogInUser, GoogleSignIn } = useContext(AuthContext);
+  const { LogInUser, GoogleSignIn, GithubSignIn } = useContext(AuthContext);
 
   const onSubmit = (data) => {
     const email = data.Email;
@@ -25,7 +25,7 @@ const Login = () => {
         const errorMessage = error.message;
       });
   };
-    const googleProvider = new GoogleAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
   const handleGoogleSignIn = () => {
     GoogleSignIn(googleProvider)
       .then((result) => {
@@ -47,6 +47,31 @@ const Login = () => {
         console.log(errorCode, errorMessage, email);
       });
   };
+
+  const GithubProvider = new GithubAuthProvider();
+  const handleGithubSignIn = () => {
+    GithubSignIn(GithubProvider)
+      .then((result) => {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        // The signed-in user info.
+        const user = result.user;
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GithubAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -138,7 +163,10 @@ const Login = () => {
                   </svg>
                   <p>Google</p>
                 </button>
-                <button className="flex items-center gap-2 border hover:bg-slate-300 p-3 rounded-2xl">
+                <button
+                  onClick={handleGithubSignIn}
+                  className="flex items-center gap-2 border hover:bg-slate-300 p-3 rounded-2xl"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 32 32"
