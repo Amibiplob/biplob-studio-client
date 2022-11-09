@@ -1,18 +1,56 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import { Link } from "react-router-dom";
+import Lottie from "lottie-react";
+import img from "../img/112454-form-registration.json";
+import { AuthContext } from "../Context/UserContext";
+import { getAuth, updateProfile } from "firebase/auth";
+import app from "../FireBase/firebase.init";
+const auth = getAuth(app);
 const Register = () => {
+  const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
+  const { createUser ,user} = useContext(AuthContext);
   const onSubmit = (data) => {
-    console.log(data.Email);
+    const name = data.Name;
+    const email = data.Email;
+    const password = data.Password;
+    console.log(user)
+    createUser(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
+
+        setError("");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        setError(errorMessage);
+      });
   };
 
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
+          <div className="flex flex-col items-center">
             <h1 className="text-5xl font-bold">Register now</h1>
+            <Lottie className="w-3/4" animationData={img} loop={true} />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -57,22 +95,24 @@ const Register = () => {
                   className="input input-bordered"
                 />
               </div>
-              <div className="flex text-red-500">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="stroke-current flex-shrink-0 h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <p className="pl-1">Error! Task failed successfully.</p>
-              </div>
+              {error && (
+                <div className="flex text-red-500">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="stroke-current flex-shrink-0 h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <p className="pl-1">{error}</p>
+                </div>
+              )}
               <div className="form-control mt-6">
                 <button
                   type="submit"
@@ -81,6 +121,12 @@ const Register = () => {
                   Register
                 </button>
               </div>
+              <p className="text-center">
+                Don't have an account?
+                <Link to="../login" className="link link-neutral ml-1">
+                  Log In
+                </Link>
+              </p>
             </form>
           </div>
         </div>

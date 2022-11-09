@@ -42,8 +42,13 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
-            daisyUI
+          <Link to="/" className="btn btn-ghost normal-case text-xl p-0 xl:p-2">
+            <img
+              className="w-5 h-5 mr-1"
+              src="https://cdn-icons-png.flaticon.com/512/1009/1009293.png"
+              alt=""
+            />
+            Biplob Studio
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -148,25 +153,59 @@ const Navbar = () => {
             Sign Up
           </Link>
 
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-hover dropdown-end ">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
+              <div className="w-10 rounded-xl">
                 <img src="https://placeimg.com/80/80/people" alt="" />
               </div>
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-neutral rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-0 p-0 shadow bg-neutral rounded-box w-52"
             >
+              <li className="items-center bg-slate-500 py-1">Hi , className</li>
               <li>
-                <Link to="dashboard" className="justify-between">
+                <Link
+                  to="dashboard"
+                  className="justify-between hover:bg-gray-600"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                    />
+                  </svg>
                   Dashboard
                   <span className="badge">New</span>
                 </Link>
               </li>
 
               <li>
-                <button>Logout</button>
+                <button className=" hover:bg-gray-600">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                    />
+                  </svg>
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
