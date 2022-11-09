@@ -6,7 +6,6 @@ import Bannar from './Header/Bannar';
 const Home = () => {
     return (
         <div>
-
             <Bannar></Bannar>
             <Card></Card>
         </div>

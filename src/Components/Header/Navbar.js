@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Context/UserContext";
 
 const Navbar = () => {
+  const { user, Logout } = useContext(AuthContext);
+  const handleLogOut = () => {
+    Logout()
+    .then(() => {
+      console.log("log out");
+    }).catch((error) => {
+      // An error happened.
+      console.log(error);
+    });
+  };
+
   return (
     <div>
       <div className="navbar bg-neutral text-neutral-content">
@@ -145,70 +157,77 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+
         <div className="navbar-end">
-          <Link to="login" className="btn btn-ghost p-1">
-            Login
-          </Link>
-          <Link to="register" className="btn btn-ghost p-1">
-            Sign Up
-          </Link>
-
-          <div className="dropdown dropdown-hover dropdown-end ">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-xl">
-                <img src="https://placeimg.com/80/80/people" alt="" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-0 p-0 shadow bg-neutral rounded-box w-52"
-            >
-              <li className="items-center bg-slate-500 py-1">Hi , className</li>
-              <li>
-                <Link
-                  to="dashboard"
-                  className="justify-between hover:bg-gray-600"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
+          {!user?.email && !user?.uid ? (
+            <>
+              <Link to="login" className="btn btn-ghost p-1">
+                Login
+              </Link>
+              <Link to="register" className="btn btn-ghost p-1">
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <div className="dropdown dropdown-hover dropdown-end ">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-xl">
+                  <img src="https://placeimg.com/80/80/people" alt="" />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-0 p-0 shadow bg-neutral rounded-box w-52"
+              >
+                <li className="items-center bg-slate-500 py-1">
+                  Hi , {user.displayName}
+                </li>
+                <li>
+                  <Link
+                    to="dashboard"
+                    className="justify-between hover:bg-gray-600"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                    />
-                  </svg>
-                  Dashboard
-                  <span className="badge">New</span>
-                </Link>
-              </li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                      />
+                    </svg>
+                    Dashboard
+                    <span className="badge">New</span>
+                  </Link>
+                </li>
 
-              <li>
-                <button className=" hover:bg-gray-600">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-                    />
-                  </svg>
-                  Logout
-                </button>
-              </li>
-            </ul>
-          </div>
+                <li>
+                  <button onClick={handleLogOut} className=" hover:bg-gray-600">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                      />
+                    </svg>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
