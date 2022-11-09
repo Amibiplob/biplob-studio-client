@@ -103,9 +103,9 @@ const Navbar = () => {
             </li>
             <li
               className="hover:bg-slate-300 hover:rounded-lg tooltip tooltip-bottom"
-              data-tip="Home"
+              data-tip="Service"
             >
-              <NavLink to="/home">
+              <NavLink to="/service">
                 {({ isActive }) => (
                   <span
                     className={
@@ -114,7 +114,7 @@ const Navbar = () => {
                         : "px-2 py-1"
                     }
                   >
-                    Home
+                    Service
                   </span>
                 )}
               </NavLink>

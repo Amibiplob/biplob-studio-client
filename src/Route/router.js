@@ -6,6 +6,8 @@ import ForgetPassword from "../Components/ForgetPassword";
 import Home from "../Components/Home";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
+import Service from "../Components/Service";
+import ServiceDetails from "../Components/ServiceDetails";
 import Root from "./Root";
 
 const router = createBrowserRouter([
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "resetpassword",
         element: <ForgetPassword></ForgetPassword>,
+      },
+      {
+        path: "service",
+        element: <Service></Service>,
+      },
+      {
+        path: "servicedetails",
+        element: <ServiceDetails></ServiceDetails>,
       },
     ],
   },
