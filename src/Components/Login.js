@@ -111,7 +111,8 @@ const Login = () => {
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <Link href="#" className="label-text-alt link link-hover">
+                  <Link to="../resetpassword" className="label-text-alt link link-hover"
+                  >
                     Forgot password?
                   </Link>
                 </label>
