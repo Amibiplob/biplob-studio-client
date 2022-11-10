@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import img from "../img/106680-login-and-sign-up.json";
 import { AuthContext } from "../Context/UserContext";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { toast } from "react-toastify";
 const Login = () => {
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
@@ -16,16 +17,21 @@ const Login = () => {
   const onSubmit = (data) => {
     const email = data.Email;
     const password = data.Password;
+    // email password login
     LogInUser(email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
-       navigate(from, { replace: true });
+        setError("");
+        toast.success("Hi, " + user?.displayName, { autoClose: 5000 });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        toast.success(errorCode, { autoClose: 500 });
+        toast.success(errorMessage, { autoClose: 500 });
+        setError(errorCode);
       });
   };
   const googleProvider = new GoogleAuthProvider();
@@ -35,10 +41,12 @@ const Login = () => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
+        console.log(token);
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
-           navigate(from, { replace: true });
+        toast.success("Hi, " + user?.displayName, { autoClose: 5000 });
+        setError("");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         // Handle Errors here.
@@ -48,7 +56,9 @@ const Login = () => {
         const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        console.log(errorCode, errorMessage, email);
+        toast.success(errorCode, { autoClose: 500 });
+        toast.success(errorMessage, { autoClose: 500 });
+        setError(errorCode);
       });
   };
 
@@ -62,7 +72,9 @@ const Login = () => {
 
         // The signed-in user info.
         const user = result.user;
-       navigate(from, { replace: true });
+             toast.success("Hi, " + user?.displayName, { autoClose: 5000 });
+        navigate(from, { replace: true });
+        setError("");
       })
       .catch((error) => {
         // Handle Errors here.
@@ -72,6 +84,9 @@ const Login = () => {
         const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GithubAuthProvider.credentialFromError(error);
+        toast.success(errorCode, { autoClose: 500 });
+        toast.success(errorMessage, { autoClose: 500 });
+        setError(errorCode);
         // ...
       });
   };
@@ -115,7 +130,9 @@ const Login = () => {
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <Link to="../resetpassword" className="label-text-alt link link-hover"
+                  <Link
+                    to="../resetpassword"
+                    className="label-text-alt link link-hover"
                   >
                     Forgot password?
                   </Link>
