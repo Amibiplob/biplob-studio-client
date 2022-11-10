@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import img from "../img/106680-login-and-sign-up.json";
 import { AuthContext } from "../Context/UserContext";
@@ -9,7 +9,10 @@ const Login = () => {
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
   const { LogInUser, GoogleSignIn, GithubSignIn } = useContext(AuthContext);
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  console.log(from);
   const onSubmit = (data) => {
     const email = data.Email;
     const password = data.Password;
@@ -18,7 +21,7 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        // ...
+       navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -35,6 +38,7 @@ const Login = () => {
         // The signed-in user info.
         const user = result.user;
         console.log(user);
+           navigate(from, { replace: true });
       })
       .catch((error) => {
         // Handle Errors here.
@@ -58,7 +62,7 @@ const Login = () => {
 
         // The signed-in user info.
         const user = result.user;
-        // ...
+       navigate(from, { replace: true });
       })
       .catch((error) => {
         // Handle Errors here.

@@ -17,21 +17,27 @@ const UserContext = ({ children }) => {
 
 
   const createUser = (email, password) => {
+       setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const LogInUser = (email, password) => {
+    setLoader(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const Logout = () => {
+    setLoader(true);
     return signOut(auth);
   };
   const GoogleSignIn = (googleProvider) => {
+    setLoader(true);
     return signInWithPopup(auth, googleProvider);
   };
   const GithubSignIn = (GithubProvider) => {
+    setLoader(true);
     return signInWithPopup(auth, GithubProvider);
   };
   const ResetPassword = (email) => {
+    setLoader(true);
     return sendPasswordResetEmail(auth, email);
   };
   
@@ -54,6 +60,7 @@ const UserContext = ({ children }) => {
     GoogleSignIn,
     GithubSignIn,
     ResetPassword,
+    loader,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

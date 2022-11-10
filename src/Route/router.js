@@ -8,6 +8,7 @@ import Login from "../Components/Login";
 import Register from "../Components/Register";
 import Service from "../Components/Service";
 import ServiceDetails from "../Components/ServiceDetails";
+import PrivateRoute from "./PrivateRoute";
 import Root from "./Root";
 
 const router = createBrowserRouter([
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
       },
       {
         path: "resetpassword",
@@ -45,7 +50,11 @@ const router = createBrowserRouter([
       },
       {
         path: "service",
-        element: <Service></Service>,
+        element: (
+          <PrivateRoute>
+            <Service></Service>
+          </PrivateRoute>
+        ),
       },
       {
         path: "servicedetails",

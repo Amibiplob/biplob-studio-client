@@ -4,9 +4,10 @@ const Dashboard = () => {
    const { user } = useContext(AuthContext);
    console.log(user)
     return (
-        <div>
-        dashboard
-        </div>
+      <div>
+        dashboard{user?.email}
+        {user?.displayName}
+      </div>
     );
 };
 
