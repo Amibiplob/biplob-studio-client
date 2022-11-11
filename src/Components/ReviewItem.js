@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../Context/UserContext';
 
 const ReviewItem = () => {
+      const { user, } = useContext(AuthContext);
+      
     return (
       <div>
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center my-10">

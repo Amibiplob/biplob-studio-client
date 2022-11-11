@@ -1,4 +1,5 @@
-import React from "react";
+import { data } from "autoprefixer";
+import React, { useEffect, useState } from "react";
 
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { useLoaderData } from "react-router-dom";
@@ -9,6 +10,18 @@ const ServiceDetails = () => {
 
   const service = useLoaderData([]);
   // console.log(service);
+
+  
+  const [review, setReview] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/review")
+      .then((res) => res.json())
+      .then((data) => setReview(data));
+  }, []);
+
+  console.log(review);
+
+
 
   return (
     <PhotoProvider>
@@ -28,28 +41,23 @@ const ServiceDetails = () => {
       </div>
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center my-10">
-        <div className="card w-96 bg-base-100 shadow-2xl">
-          <div className="card-body p-5">
-            <div className="flex gap-6 items-center">
-              <img
-                className="w-10 h-10 rounded-full"
-                src="https://placeimg.com/192/192/people"
-                alt=""
-              />
+      {review.map((data) => (
+          <div className="card w-96 bg-base-100 shadow-2xl">
+            <div className="card-body p-5">
+              <div className="flex gap-6 items-center">
+                <img className="w-10 h-10 rounded-full" src={data.photoURL} alt="" />
 
-              <div>
-                <h2 className="card-title">email</h2>
-                <p>rating : 5 </p>
+                <div>
+                  <h2 className="card-title">Name :<span className=" text-sm">{data.displayName}</span></h2>
+                  <h2 className="card-title">Email :<span className=" text-sm">{data.email}</span></h2>
+                  <p><span className="font-bold">Rating : </span>{data.rating} </p>
+                </div>
               </div>
+              <hr />
+              <p>{data.reviewText}</p>
             </div>
-            <hr />
-            <p>
-              If a dog chews shoes whose shoes does he choose?If a dog chews
-              shoes whose shoes does he choose? If a dog chews shoes whose shoes
-              does he choose? If a dog chews shoes whose shoes does he choose?
-            </p>
           </div>
-        </div>
+      ))}
       </div>
 
       <ServiceReview service={service}></ServiceReview>
