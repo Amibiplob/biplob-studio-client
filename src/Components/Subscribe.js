@@ -8,7 +8,7 @@ const Subscribe = () => {
 const subscribe ={
     Email : email,
 }
-    fetch("http://localhost:5000/subscribe", {
+    fetch("https://biplob-studio.vercel.app/subscribe", {
       method: "POST",
       headers: {
         "content-type": "application/json",

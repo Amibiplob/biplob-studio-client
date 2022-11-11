@@ -45,13 +45,13 @@ const router = createBrowserRouter([
       },
       {
         path: "service",
-        loader: () => fetch("http://localhost:5000/services"),
+        loader: () => fetch("https://biplob-studio.vercel.app/services"),
         element: <Service></Service>,
       },
       {
         path: "servicedetails/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/services/${params.id}`),
+          fetch(`https://biplob-studio.vercel.app/${params.id}`),
         element: (
           <PrivateRoute>
             <ServiceDetails></ServiceDetails>

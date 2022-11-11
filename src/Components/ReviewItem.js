@@ -7,7 +7,7 @@ const ReviewItem = () => {
   const { email, displayName } = user;
   const [review, setReview] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/review?email=${email}`)
+    fetch(`https://biplob-studio.vercel.app/review?email=${email}`)
       .then((res) => res.json())
       .then((data) => setReview(data));
   }, [email]);
@@ -15,7 +15,7 @@ const ReviewItem = () => {
   console.log(review);
   const reviewEdit = () => {};
   const reviewDelete = (id) => {
-    fetch(`http://localhost:5000/review/${id}`, {
+    fetch(`https://biplob-studio.vercel.app/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

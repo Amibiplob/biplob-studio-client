@@ -21,17 +21,18 @@ const ServiceReview = ({ service }) => {
       photoURL,
     };
     console.log(makereview);
-    fetch("http://localhost:5000/review",{
-        method:'POST',
-        headers:{
-            'content-type': 'application/json'
-        },
-        body:JSON.stringify(makereview)
+    fetch("https://biplob-studio.vercel.app/review", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(makereview),
     })
-    .then((res) => res.json())
+      .then((res) => res.json())
       .then((data) => {
-        if(data.acknowledged){
-         toast.success("Thanks For Your Review. ", { autoClose: 5000 })}
+        if (data.acknowledged) {
+          toast.success("Thanks For Your Review. ", { autoClose: 5000 });
+        }
       });
   };
 
