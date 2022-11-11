@@ -15,7 +15,7 @@ import Root from "./Root";
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement:<ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Root></Root>,
     children: [
       {
@@ -52,6 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "service",
+        loader: () => fetch("http://localhost:5000/services"),
         element: (
           <PrivateRoute>
             <Service></Service>
@@ -59,8 +60,13 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "servicedetails",
-        element: <ServiceDetails></ServiceDetails>,
+        path: "servicedetails/:id",
+        loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },
