@@ -1,14 +1,15 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../Components/Blog";
-import Dashboard from "../Components/Dashboard";
 import ErrorPage from "../Components/ErrorPage";
 import ForgetPassword from "../Components/ForgetPassword";
 import Home from "../Components/Home";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
+import ReviewItem from "../Components/ReviewItem";
 import Service from "../Components/Service";
 import ServiceDetails from "../Components/ServiceDetails";
+import ServiceReview from "../Components/ServiceReview";
 import PrivateRoute from "./PrivateRoute";
 import Root from "./Root";
 
@@ -39,14 +40,6 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path: "dashboard",
-        element: (
-          <PrivateRoute>
-            <Dashboard></Dashboard>
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "resetpassword",
         element: <ForgetPassword></ForgetPassword>,
       },
@@ -61,12 +54,27 @@ const router = createBrowserRouter([
       },
       {
         path: "servicedetails/:id",
-        loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/services/${params.id}`),
         element: (
           <PrivateRoute>
             <ServiceDetails></ServiceDetails>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "reviewitem",
+        element: (
+          <PrivateRoute>
+            <ReviewItem></ReviewItem>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "servicereview",
+        element: <PrivateRoute>
+          <ServiceReview></ServiceReview>
+        </PrivateRoute>,
       },
     ],
   },

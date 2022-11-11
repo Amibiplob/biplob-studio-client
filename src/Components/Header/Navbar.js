@@ -120,42 +120,8 @@ const Navbar = () => {
                 )}
               </NavLink>
             </li>
-            <li
-              className="hover:bg-slate-300 hover:rounded-lg tooltip tooltip-bottom"
-              data-tip="Home"
-            >
-              <NavLink to="/home">
-                {({ isActive }) => (
-                  <span
-                    className={
-                      isActive
-                        ? "bg-blue-100 text-blue-600 round px-2 py-1 rounded-lg"
-                        : "px-2 py-1"
-                    }
-                  >
-                    Home
-                  </span>
-                )}
-              </NavLink>
-            </li>
-            <li
-              className="hover:bg-slate-300 hover:rounded-lg tooltip tooltip-bottom"
-              data-tip="Home"
-            >
-              <NavLink to="/home">
-                {({ isActive }) => (
-                  <span
-                    className={
-                      isActive
-                        ? "bg-blue-100 text-blue-600 round px-2 py-1 rounded-lg"
-                        : "px-2 py-1"
-                    }
-                  >
-                    Home
-                  </span>
-                )}
-              </NavLink>
-            </li>
+       
+          
           </ul>
         </div>
 
@@ -185,24 +151,19 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="dashboard"
+                    to="reviewitem"
                     className="justify-between hover:bg-gray-600"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                      />
-                    </svg>
-                    Dashboard
+                    My Reviews
+                    <span className="badge">New</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="servicereview"
+                    className="justify-between hover:bg-gray-600"
+                  >
+                    Add Service
                     <span className="badge">New</span>
                   </Link>
                 </li>

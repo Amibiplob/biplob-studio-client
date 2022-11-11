@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { AuthContext } from "../Context/UserContext";
 
 const ForgetPassword = () => {
@@ -11,12 +12,13 @@ const ForgetPassword = () => {
      ResetPassword(email)
        .then(() => {
          // Password reset email sent!
-         // ..
-         console.log('first')
+         toast.error("Password reset email sent!", { autoClose: 500 });
        })
        .catch((error) => {
          const errorCode = error.code;
          const errorMessage = error.message;
+          toast.error(errorMessage, { autoClose: 500 });
+          toast.error(errorCode, { autoClose: 500 });
        setError(errorMessage)
        });
   };

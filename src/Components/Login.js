@@ -29,8 +29,8 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        toast.success(errorCode, { autoClose: 500 });
-        toast.success(errorMessage, { autoClose: 500 });
+        toast.error(errorCode, { autoClose: 500 });
+        toast.error(errorMessage, { autoClose: 500 });
         setError(errorCode);
       });
   };
@@ -56,8 +56,8 @@ const Login = () => {
         const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        toast.success(errorCode, { autoClose: 500 });
-        toast.success(errorMessage, { autoClose: 500 });
+        toast.error(errorCode, { autoClose: 500 });
+        toast.error(errorMessage, { autoClose: 500 });
         setError(errorCode);
       });
   };
@@ -84,8 +84,8 @@ const Login = () => {
         const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GithubAuthProvider.credentialFromError(error);
-        toast.success(errorCode, { autoClose: 500 });
-        toast.success(errorMessage, { autoClose: 500 });
+        toast.error(errorCode, { autoClose: 500 });
+        toast.error(errorMessage, { autoClose: 500 });
         setError(errorCode);
         // ...
       });

@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Card = () => {
 
-
-
   const [service, setService] = useState([]);
-
   useEffect(() => {
-    fetch("http://localhost:5000/services")
+    fetch("http://localhost:5000/")
       .then((res) => res.json())
       .then((data) => setService(data));
   }, []);
-
-
-
-
-
-
-
     return (
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center my-10">
         {service.map((data) => (
@@ -37,6 +28,9 @@ const Card = () => {
             </div>
           </div>
         ))}
+        <Link to='../service' className="btn mx-auto md:col-span-2 lg:col-span-3">
+          View All
+        </Link>
       </div>
     );
 };

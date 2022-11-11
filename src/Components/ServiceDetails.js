@@ -1,20 +1,22 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+
+import { PhotoProvider, PhotoView } from "react-photo-view";
 import { useLoaderData } from "react-router-dom";
+import ServiceReview from "./ServiceReview";
+
 
 const ServiceDetails = () => {
+
   const service = useLoaderData([]);
-  console.log(service);
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    const email = data.Email;
-    console.log(data);
-  };
+  // console.log(service);
+
   return (
-    <div>
+    <PhotoProvider>
       <div className="card lg:card-side bg-base-100 shadow-xl w-3/4 mx-auto">
         <figure>
-          <img className="w-full lg:h-96" src={service.picture} alt="" />
+          <PhotoView key={service.id} src={service.picture} alt="">
+            <img className="w-full lg:h-96" src={service.picture} alt="" />
+          </PhotoView>
         </figure>
         <div className="card-body">
           <h2 className="card-title"> {service.name}</h2>
@@ -50,46 +52,8 @@ const ServiceDetails = () => {
         </div>
       </div>
 
-      <div className="card w-96 bg-base-100 shadow-xl mx-auto my-10">
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-          <h2 className="card-title ">Rating</h2>
-          <hr />
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Your Name</span>
-            </label>
-            <input
-              className="input input-bordered"
-              type="text"
-              placeholder={service.name}
-          readOnly
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              className="input input-bordered"
-              type="text"
-              placeholder="Email"
-              {...register("text", {
-                required: true,
-              })}
-            />
-          </div>
-          
-          <div className="card-actions justify-end">
-            <button
-              type="submit"
-              className="btn bg-slate-500 hover:bg-slate-700 mt-5"
-            >
-             Rating
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <ServiceReview service={service}></ServiceReview>
+    </PhotoProvider>
   );
 };
 
