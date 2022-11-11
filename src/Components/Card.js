@@ -12,7 +12,7 @@ const Card = () => {
     return (
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center my-10">
         {service.map((data) => (
-          <div className="card w-96 bg-base-100 shadow-xl">
+          <div key={data.id} className="card w-96 bg-base-100 shadow-xl">
             <figure>
               <img src={data.picture} alt="" />
             </figure>

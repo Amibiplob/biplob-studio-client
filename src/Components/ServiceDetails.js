@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import React, { useEffect, useState } from "react";
 
 import { PhotoProvider, PhotoView } from "react-photo-view";
@@ -34,15 +33,13 @@ const ServiceDetails = () => {
         <div className="card-body">
           <h2 className="card-title"> {service.name}</h2>
           <p>{service.about}</p>
-          <div className="card-actions justify-end">
-            <button className="btn ">Rating</button>
-          </div>
+        
         </div>
       </div>
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center my-10">
       {review.map((data) => (
-          <div className="card w-96 bg-base-100 shadow-2xl">
+          <div key={data.id} className="card w-96 bg-base-100 shadow-2xl">
             <div className="card-body p-5">
               <div className="flex gap-6 items-center">
                 <img className="w-10 h-10 rounded-full" src={data.photoURL} alt="" />
