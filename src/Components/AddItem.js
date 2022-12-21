@@ -21,7 +21,7 @@ const AddItem = () => {
       about:about
     };
 
-    fetch("http://localhost:5000/addservice", {
+    fetch("https://biplob-studio.vercel.app/addservice", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -31,7 +31,7 @@ const AddItem = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-                     reset();
+          reset();
           toast.success("Service added ", { autoClose: 5000 });
         }
       });
