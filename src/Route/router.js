@@ -1,10 +1,12 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import AddItem from "../Components/AddItem";
 import Blog from "../Components/Blog";
 import ErrorPage from "../Components/ErrorPage";
 import ForgetPassword from "../Components/ForgetPassword";
 import Home from "../Components/Home";
 import Login from "../Components/Login";
+import Profile from "../Components/Profile";
 import Register from "../Components/Register";
 import ReviewItem from "../Components/ReviewItem";
 import Service from "../Components/Service";
@@ -51,7 +53,7 @@ const router = createBrowserRouter([
       {
         path: "servicedetails/:id",
         loader: ({ params }) =>
-          fetch(`https://biplob-studio.vercel.app/${params.id}`),
+          fetch(`https://biplob-studio.vercel.app/services/${params.id}`),
         element: (
           <PrivateRoute>
             <ServiceDetails></ServiceDetails>
@@ -71,6 +73,23 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ServiceReview></ServiceReview>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "addservice",
+        loader: () => fetch("https://biplob-studio.vercel.app/services"),
+        element: (
+          <PrivateRoute>
+            <AddItem></AddItem>
           </PrivateRoute>
         ),
       },

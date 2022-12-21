@@ -11,9 +11,10 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const { LogInUser, GoogleSignIn, GithubSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
-  console.log(from);
+
   const onSubmit = (data) => {
     const email = data.Email;
     const password = data.Password;
@@ -39,9 +40,8 @@ const Login = () => {
     GoogleSignIn(googleProvider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        console.log(token);
+
+   
         // The signed-in user info.
         const user = result.user;
         toast.success("Hi, " + user?.displayName, { autoClose: 5000 });
@@ -53,9 +53,6 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
         toast.error(errorCode, { autoClose: 500 });
         toast.error(errorMessage, { autoClose: 500 });
         setError(errorCode);
@@ -67,8 +64,7 @@ const Login = () => {
     GithubSignIn(GithubProvider)
       .then((result) => {
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        const credential = GithubAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+
 
         // The signed-in user info.
         const user = result.user;
@@ -81,9 +77,7 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GithubAuthProvider.credentialFromError(error);
+
         toast.error(errorCode, { autoClose: 500 });
         toast.error(errorMessage, { autoClose: 500 });
         setError(errorCode);

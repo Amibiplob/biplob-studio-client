@@ -1,35 +1,109 @@
-import React from 'react';
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddItem = () => {
-    return (
-      <div>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center my-10">
-          <div className="card w-96 bg-base-100 shadow-2xl">
-            <div className="card-body p-5">
-              <div className="flex gap-6 items-center">
-                <img
-                  className="w-10 h-10 rounded-full"
-                  src="https://placeimg.com/192/192/people"
-                  alt=""
-                />
+  const service = useLoaderData([]);
 
-                <div>
-                  <h2 className="card-title">email</h2>
-                  <p>rating : 5 </p>
-                </div>
-              </div>
-              <hr />
-              <p>
-                If a dog chews shoes whose shoes does he choose?If a dog chews
-                shoes whose shoes does he choose? If a dog chews shoes whose
-                shoes does he choose? If a dog chews shoes whose shoes does he
-                choose?
-              </p>
+
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = (data) => {
+    const id= data.id;
+    const serviceName= data.serviceName;
+    const photo= data.photo;
+    const about= data.about;
+
+    const addService = {
+      id:id,
+      name:serviceName,
+      picture:photo,
+      about:about
+    };
+
+    fetch("http://localhost:5000/addservice", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addService),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+                     reset();
+          toast.success("Service added ", { autoClose: 5000 });
+        }
+      });
+  };
+  return (
+    <div>
+      <div className="card bg-base-100 shadow-xl mx-auto my-10">
+        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+          <h2 className="card-title">Add Service</h2>
+          <hr />
+          <div className="grid lg:grid-cols-3 gap-5">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Service ID</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                {...register("id", { required: true })}
+                defaultValue={service.length++}
+                readOnly
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Service Name</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                placeholder="Service Name"
+                {...register("serviceName", { required: true })}
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                placeholder="Photo URL"
+                {...register("photo", { required: true })}
+              />
+            </div>
+
+            <div className="form-control lg:col-span-3">
+              <label className="label">
+                <span className="label-text">Service Details</span>
+              </label>
+              <textarea
+                className="textarea textarea-bordered h-24"
+                type="text"
+                placeholder="Service About   /  Details"
+                {...register("about", {
+                  required: true,
+                })}
+              />
             </div>
           </div>
-        </div>
+          <div className="card-actions justify-end">
+            <button
+              type="submit"
+              className="btn bg-slate-500 hover:bg-slate-700 mt-5"
+            >
+              Add Service
+            </button>
+          </div>
+        </form>
       </div>
-    );
+    </div>
+  );
 };
 
 export default AddItem;

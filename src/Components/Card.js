@@ -23,12 +23,22 @@ const Card = () => {
               </h2>
               <p>{data.about.slice(0, 100) + "....."}</p>
               <div className="card-actions justify-end">
-                <div className="badge badge-outline p-3">See More</div>
+
+                  <Link
+                    to={`../servicedetails/${data.id}`}
+                    className="badge btn-outline p-3"
+                  >
+                    See More
+                  </Link>
+       
               </div>
             </div>
           </div>
         ))}
-        <Link to='../service' className="btn mx-auto md:col-span-2 lg:col-span-3">
+        <Link
+          to="../service"
+          className="btn mx-auto md:col-span-2 lg:col-span-3"
+        >
           View All
         </Link>
       </div>

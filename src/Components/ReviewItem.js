@@ -12,10 +12,9 @@ const ReviewItem = () => {
       .then((data) => setReview(data));
   }, [email]);
 
-  console.log(review);
   const reviewEdit = () => {};
   const reviewDelete = (id) => {
-    fetch(`https://biplob-studio.vercel.app/${id}`, {
+    fetch(`https://biplob-studio.vercel.app/review/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -39,26 +38,28 @@ const ReviewItem = () => {
 
   return (
     <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10 justify-items-center my-10">
-      {user ? (
+      {review ? (
         <>
           {review.map((data) => (
             <div key={data.id} className="card w-96 bg-base-100 shadow-2xl">
               <div className="flex justify-end gap-3 p-3 pb-0">
-                <svg
-                  onClick={reviewEdit}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                  />
-                </svg>
+                <button className="btn">
+                  <svg
+                    onClick={reviewEdit}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                    />
+                  </svg>
+                </button>
 
                 <label htmlFor="my-modal-3" className="btn">
                   <svg

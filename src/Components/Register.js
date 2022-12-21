@@ -1,33 +1,42 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import img from "../img/112454-form-registration.json";
 import { AuthContext } from "../Context/UserContext";
 import { getAuth, updateProfile } from "firebase/auth";
 import app from "../FireBase/firebase.init";
+import { toast } from "react-toastify";
 const auth = getAuth(app);
 const Register = () => {
   const [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
-  const { createUser ,user} = useContext(AuthContext);
+  const { createUser} = useContext(AuthContext);
+
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+
   const onSubmit = (data) => {
     const name = data.Name;
     const email = data.Email;
     const password = data.Password;
-    console.log(user)
+
     createUser(email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
+
 
         updateProfile(auth.currentUser, {
           displayName: name,
         })
           .then(() => {
             // Profile updated!
-            // ...
+  toast.success("Hi " + user.displayName, { autoClose: 5000 });
+  navigate(from, { replace: true });
           })
           .catch((error) => {
             // An error occurred
@@ -39,7 +48,7 @@ const Register = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+
         setError(errorMessage);
       });
   };

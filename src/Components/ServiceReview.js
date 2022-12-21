@@ -20,7 +20,7 @@ const ServiceReview = ({ service }) => {
       displayName,
       photoURL,
     };
-    console.log(makereview);
+
     fetch("https://biplob-studio.vercel.app/review", {
       method: "POST",
       headers: {
@@ -49,7 +49,7 @@ const ServiceReview = ({ service }) => {
             <input
               className="input input-bordered"
               type="text"
-              placeholder={displayName}
+              defaultValue={displayName}
               readOnly
             />
           </div>
@@ -60,7 +60,7 @@ const ServiceReview = ({ service }) => {
             <input
               className="input input-bordered"
               type="text"
-              placeholder={user ? email : "No Email Found"}
+              defaultValue={email ? email : "No Email Found"}
               readOnly
             />
           </div>

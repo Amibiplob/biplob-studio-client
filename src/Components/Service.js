@@ -4,6 +4,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const Service = () => {
   const service = useLoaderData([]);
+
   return (
     <PhotoProvider>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center my-10">

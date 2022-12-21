@@ -11,7 +11,7 @@ const Navbar = () => {
       })
       .catch((error) => {
         // An error happened.
-        console.log(error);
+
       });
   };
 
@@ -47,11 +47,11 @@ const Navbar = () => {
               className="dropdown-content mt-2 shadow bg-neutral rounded-lg w-52"
             >
               <li className="p-2 hover:bg-slate-800 hover:rounded-lg">
-                <Link>Item 1</Link>
+                <Link to='/blog'>Blog</Link>
               </li>
 
               <li className="p-2 hover:bg-slate-800 hover:rounded-lg">
-                <Link>Item 1</Link>
+                <Link to='/service'>Service</Link>
               </li>
             </ul>
           </div>
@@ -137,7 +137,14 @@ const Navbar = () => {
             <div className="dropdown dropdown-hover dropdown-end ">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-xl">
-                  <img src={user.photoURL} alt="" />
+                  <img
+                    src={
+                      user?.photoURL
+                        ? user.photoURL
+                        : "https://cdn.vectorstock.com/i/1000x1000/25/72/picture-coming-soon-icon-vector-31612572.webp"
+                    }
+                    alt=""
+                  />
                 </div>
               </label>
               <ul
@@ -146,6 +153,15 @@ const Navbar = () => {
               >
                 <li className="items-center bg-slate-500 py-1">
                   Hi , {user.displayName}
+                </li>
+                <li>
+                  <Link
+                    to="profile"
+                    className="justify-between hover:bg-gray-600"
+                  >
+                    Profile
+                    <span className="badge">New</span>
+                  </Link>
                 </li>
                 <li>
                   <Link
@@ -158,7 +174,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="servicereview"
+                    to="addservice"
                     className="justify-between hover:bg-gray-600"
                   >
                     Add Service

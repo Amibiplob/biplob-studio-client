@@ -2,9 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 const Subscribe = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-   const email = data.Email;
+   const email = data.SubEmail;
 const subscribe ={
     Email : email,
 }
@@ -16,7 +16,9 @@ const subscribe ={
       body: JSON.stringify(subscribe),
     })
       .then((res) => res.json())
-      .then((data) => toast.success("Email Subscribe", { autoClose: 500 }));
+      .then((data) => {
+           reset();
+        toast.success("Email Subscribe", { autoClose: 500 })});
   };
 
 
@@ -38,7 +40,7 @@ const subscribe ={
             className="input input-bordered"
             type="text"
             placeholder="Email"
-            {...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
+            {...register("SubEmail", { required: true, pattern: /^\S+@\S+$/i })}
           />
         </div>
 
